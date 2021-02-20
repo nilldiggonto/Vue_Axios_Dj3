@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'authapi',
     'bookmarks',
+    'dashboard',
     'rest_framework',
     'corsheaders',
     'crispy_forms',
