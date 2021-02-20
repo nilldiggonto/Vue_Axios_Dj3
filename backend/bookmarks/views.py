@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -28,3 +29,13 @@ def SignupView(request):
         'form':form,
     }
     return render(request,template_name,context)
+
+
+
+
+
+####### BOOKMARK CATEGORIES
+@login_required
+def categoriesView(request):
+    template_name = 'bookmarks/categories.html'
+    return render(request,template_name)
