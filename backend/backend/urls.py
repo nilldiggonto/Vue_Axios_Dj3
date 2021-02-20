@@ -7,4 +7,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('authapi.urls')),
     path('bookmark/',include('bookmarks.urls')),
+    path('dashboard/',include('dashboard.urls')),
 ]
