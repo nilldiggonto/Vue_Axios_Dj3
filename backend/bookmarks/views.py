@@ -45,3 +45,14 @@ def categoriesView(request):
         'category':category,
     }
     return render(request,template_name,context)
+
+@login_required
+def categoryDetailView(request,id):
+    # TimeoutError
+    template_name= 'bookmarks/category-detail.html'
+    category = Category.objects.get(pk=id)
+
+    context = {
+        'cat':category,
+    }
+    return render(request,template_name,context)
