@@ -1,6 +1,7 @@
 <template>
-  <div id="myApp">
-    <h4>Hlw Something</h4>
+  <div id="app">
+    <!-- <h4>Hlw </h4> -->
+    <router-view/>
   </div>
 </template>
 
@@ -12,7 +13,8 @@ export default {
 </script>
 
 <style>
-body {
-  background-color: antiquewhite;
-}
+  body{
+    background-color: bisque;
+  }
+
 </style>

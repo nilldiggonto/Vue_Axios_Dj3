@@ -51,35 +51,35 @@
 </template>
 
 <script>
-export default {
-  name: "App",
-  data() {
-    return {
-      name: "Nill",
-      list: [
-        { task: "API build", complete: false },
-        { task: "New project", complete: false },
-        { task: "Exercise", complete: false },
-      ],
-      hide:true,
-      newItemText:"",
-    };
-  },
-  computed:{
-    hiddenList(){
-      return this.hide? this.list.filter(l=> !l.complete): this.list
-    }
-  },
-  methods:{
-    addNewLog(){
-      this.list.push({
-        task: this.newItemText,
-        complete:false
-      });
-      this.newItemText = "";
-    }
-  }
-};
+// export default {
+//   name: "App",
+//   data() {
+//     return {
+//       name: "Nill",
+//       list: [
+//         { task: "API build", complete: false },
+//         { task: "New project", complete: false },
+//         { task: "Exercise", complete: false },
+//       ],
+//       hide:true,
+//       newItemText:"",
+//     };
+//   },
+//   computed:{
+//     hiddenList(){
+//       return this.hide? this.list.filter(l=> !l.complete): this.list
+//     }
+//   },
+//   methods:{
+//     addNewLog(){
+//       this.list.push({
+//         task: this.newItemText,
+//         complete:false
+//       });
+//       this.newItemText = "";
+//     }
+// //   }
+// };
 </script>
 
 <style>
