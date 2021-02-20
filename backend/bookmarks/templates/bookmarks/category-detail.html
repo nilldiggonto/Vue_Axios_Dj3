@@ -12,6 +12,7 @@
   </ol>
 
 <div class="container mt-1">
+    <a href="{%url 'bookmark-add' cat.id %}" class="btn btn-block btn-sm btn-success">Add New Bookmark</a>
     <div class="row ">
  
         {% for bookmark in cat.bookmarks.all %}

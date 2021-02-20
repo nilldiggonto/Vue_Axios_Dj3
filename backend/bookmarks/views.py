@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 
 from .models import Category
-from .forms import CategoryForm
+from .forms import CategoryForm,BookmarkForm
 
 
 # Create your views here.
@@ -76,5 +76,31 @@ def categoryDetailView(request,id):
 
     context = {
         'cat':category,
+    }
+    return render(request,template_name,context)
+
+
+
+##bookmark add
+@login_required
+def bookmarkAddView(request,id):
+    template_name = 'bookmarks/bookmark-add.html'
+    category = Category.objects.get(pk=id)
+    form = BookmarkForm()
+    if request.method == 'POST':
+        form = BookmarkForm(request.POST)
+
+        if form.is_valid():
+            bookmark = form.save(commit=False)
+            bookmark.added_by = request.user
+            bookmark.category_id = id
+            bookmark.save()
+
+            return redirect('bookmark-category-detail',id=id)
+    else:
+        form = BookmarkForm()
+    context = {
+        'form':form,
+        'category':category,
     }
     return render(request,template_name,context)
