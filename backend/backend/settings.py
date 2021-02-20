@@ -44,6 +44,10 @@ INSTALLED_APPS = [
     'crispy_forms',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+LOGIN_URL = 'bookmark-login'
+LOGIN_REDIRECT_URL = 'bookmark-page'
+LOGOUT_REDIRECT_URL = 'bookmark-page'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
