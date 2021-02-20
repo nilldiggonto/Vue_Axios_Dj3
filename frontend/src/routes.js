@@ -11,7 +11,7 @@ export default new VueRouter ({
     routes: [
         {
             path: '/',
-            name:'Posts',
+            name:'posts',
             component:Posts,
         },
     ]
