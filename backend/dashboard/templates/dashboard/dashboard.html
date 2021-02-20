@@ -11,51 +11,28 @@
 
 <div class="container mt-1">
     <div class="row">
+
+        {% for bookmark in bookmarks %}
         <div class="col-md-4">
             <div class="card border border-secondary">
                 <div class="card-header bg-primary text-white">
-                    <h4>LINK TITLE</h4>
+                    <h4>{{bookmark.title}}</h4>
                 </div>
                 <div class="card-body">
-                    <p>Something about the link</p>
+                    <p>{{bookmark.description}}</p>
                 </div>
                 <div class="card-footer">
-                    <a href="#" class="btn btn-info btn-block">Visit</a>
+                    <a href="{{bookmark.url}}" target="_blank" class="btn btn-info btn-block">Visit</a>
                     <a href="#" class="btn btn-primary btn-block">Edit</a>
                 </div>
             </div>
         </div> <!--col-md-4-->
+        {% endfor %}
 
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">
-                    <h4>LINK TITLE</h4>
-                </div>
-                <div class="card-body">
-                    <p>Something about the link</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-info btn-block">Visit</a>
-                    <a href="#" class="btn btn-primary btn-block">Edit</a>
-                </div>
-            </div>
-        </div> <!--col-md-4-->
+         <!--col-md-4-->
 
 
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">
-                    <h4>LINK TITLE</h4>
-                </div>
-                <div class="card-body">
-                    <p>Something about the link</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-info btn-block">Visit</a>
-                    <a href="#" class="btn btn-primary btn-block">Edit</a>
-                </div>
-            </div>
-        </div> <!--col-md-4-->
+        <!--col-md-4-->
     </div>
 </div>
 
