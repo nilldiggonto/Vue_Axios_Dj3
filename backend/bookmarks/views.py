@@ -59,6 +59,31 @@ def categoryAddView(request):
     return render(request,template_name,context)
 
 
+#edit
+@login_required
+def categoryEditView(request,id):
+    template_name = 'bookmarks/category-edit.html'
+    catForm = Category.objects.filter(added_by=request.user).get(pk=id)
+    form = CategoryForm(request.POST,instance=catForm)
+    if request.method == 'POST':
+        form = CategoryForm(request.POST,instance=catForm)
+
+        if form.is_valid():
+            # category = form.save(commit=False)
+            form.save()
+            # category.added_by = request.user
+            # category.save()
+
+            return redirect('bookmark-category')
+    else:
+        form = CategoryForm(instance=catForm)
+    context = {
+        'form':form,
+        'catForm':catForm,
+    }
+    return render(request,template_name,context)
+
+
 @login_required
 def categoriesView(request):
     template_name = 'bookmarks/categories.html'
@@ -78,6 +103,15 @@ def categoryDetailView(request,id):
         'cat':category,
     }
     return render(request,template_name,context)
+
+
+
+@login_required
+def category_delete(request,id):
+    category = Category.objects.filter(created_by=request.user).get(pk=id)
+    # categoriesView
+    category.delete()
+    return redirect('bookmark-category')
 
 
 
@@ -104,3 +138,6 @@ def bookmarkAddView(request,id):
         'category':category,
     }
     return render(request,template_name,context)
+
+
+
