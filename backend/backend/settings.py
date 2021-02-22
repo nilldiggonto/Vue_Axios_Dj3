@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'crispy_forms',
+    'task',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_URL = 'bookmark-login'
