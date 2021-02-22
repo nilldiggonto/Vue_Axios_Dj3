@@ -3,6 +3,53 @@
 
 {%block content %}
 
-<h4>Task Page</h4>
+{% verbatim %}
+
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-8">
+           <div id="app">
+            <div class="card">
+                <div class="card-header bg-primary text-light text-center">
+                    <h5>LIST OF ALL MY TASK</h5>
+                   <form action="" class="form-inline d-flex justify-content-center">
+                       <input type="text" class="form-control mx-1" v-model="task">
+                       <button class="btn btn-success btn-sm">Add</button>
+                    
+                   </form>
+                </div>
+            </div>
+            <div class="card" v-for="task in tasks">
+                <div class="card-body border border-success">
+
+                    <span>{{task.title}}</span>
+                    <button class="btn btn-danger btn-sm float-right">&times;</button>
+
+                </div>
+            </div>
+           </div><!--Vue APP-->
+        </div>
+    </div>
+</div>
+
+{% endverbatim%}
 
 {%endblock %}
+
+
+{%block script %}
+
+<script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            task: '',
+            tasks:[
+                {title:'one'},
+                {title:'two'},
+            ]
+        }
+    })
+</script>
+
+{%endblock script %}
