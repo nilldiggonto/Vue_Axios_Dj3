@@ -12,15 +12,16 @@
   </ol>
 
 <div class="container mt-1">
-    <a href="{%url 'bookmark-add' cat.id %}" class="btn btn-block btn-sm btn-success">Add New Bookmark</a>
+    <a href="{%url 'bookmark-add' cat.id %}" class="btn btn-block btn-sm btn-success mb-2">Add New Bookmark</a>
     <div class="row ">
  
         {% for bookmark in cat.bookmarks.all %}
        
         <div class="col-md-4">
             <div class="card border border-secondary mb-2">
-                <div class="card-header bg-primary text-white">
-                    <h4>{{bookmark.title}}</h4>
+                <div class="card-header bg-info text-white">
+                    <h4 class="d-inline">{{bookmark.title}}</h4>
+                    <span class="float-right"><a href="{%url 'bookmark-delete' cat.id bookmark.id %}" class="btn btn-sm btn-danger">Delete</a></span>
                 </div>
                 <div class="card-body">
                    <p>{{bookmark.description}}</p>
@@ -28,7 +29,7 @@
                 </div>
                 <div class="card-footer">
                     <a href="{{bookmark.url}}" class="btn btn-info btn-block">Visit</a>
-                    <a href="#" class="btn btn-primary btn-block">Edit</a>
+                    <a href="{% url 'bookmark-edit' cat.id bookmark.id %}" class="btn btn-primary btn-block">Edit</a>
                 </div>
             </div>
         </div> <!--col-md-4-->

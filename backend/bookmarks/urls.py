@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (bookmarkView,SignupView,categoriesView,categoryDetailView,categoryAddView,
-                        bookmarkAddView,categoryEditView,category_delete)
+                        bookmarkAddView,categoryEditView,category_delete,bookmarkEditView,bookmark_delete)
 from django.contrib.auth import views
 urlpatterns = [
     path('',bookmarkView,name='bookmark-page'),
@@ -19,4 +19,7 @@ urlpatterns = [
     path('category/<int:id>/',categoryDetailView,name='bookmark-category-detail'),
 
     path('category/bookmark/<int:id>/',bookmarkAddView,name='bookmark-add'),
+    path('category/bookmark/<int:cat_id>/<int:book_id>/',bookmarkEditView,name='bookmark-edit'),
+    path('category/bookmark/delete/<int:cat_id>/<int:book_id>/',bookmark_delete,name='bookmark-delete'),
+
 ]

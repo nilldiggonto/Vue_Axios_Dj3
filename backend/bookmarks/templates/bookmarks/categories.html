@@ -17,7 +17,8 @@
         <div class="col-md-4">
             <div class="card border border-secondary mb-2">
                 <div class="card-header bg-primary text-white">
-                    <h4>{{cat.title}}</h4>
+                    <h4 class="d-inline">{{cat.title}}</h4>
+                    <span class="float-right"><a href="{% url 'bookmark-category-delete' cat.id %}" class="btn btn-sm btn-danger">Delete</a></span>
                 </div>
                 <div class="card-body">
                     <p>{{cat.description}}</p>

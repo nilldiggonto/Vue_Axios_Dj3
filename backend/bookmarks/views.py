@@ -3,7 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 
-from .models import Category
+from .models import Category,Bookmark
 from .forms import CategoryForm,BookmarkForm
 
 
@@ -93,6 +93,8 @@ def categoriesView(request):
     }
     return render(request,template_name,context)
 
+
+### BOOKMARK UNDER CATEGORy
 @login_required
 def categoryDetailView(request,id):
     # TimeoutError
@@ -108,10 +110,17 @@ def categoryDetailView(request,id):
 
 @login_required
 def category_delete(request,id):
-    category = Category.objects.filter(created_by=request.user).get(pk=id)
+    category = Category.objects.filter(added_by=request.user).get(pk=id)
     # categoriesView
     category.delete()
     return redirect('bookmark-category')
+
+
+
+
+
+
+
 
 
 
@@ -138,6 +147,42 @@ def bookmarkAddView(request,id):
         'category':category,
     }
     return render(request,template_name,context)
+
+
+#bookmark EDIT
+@login_required
+def bookmarkEditView(request,cat_id,book_id):
+    template_name = 'bookmarks/bookmark_update.html'
+    category = Category.objects.get(pk=cat_id)
+
+    bookmark_e = Bookmark.objects.filter(added_by=request.user).get(pk=book_id)
+    # form = BookmarkForm(request.POST, instance=bookmark_e)
+    if request.method == 'POST':
+        form = BookmarkForm(request.POST,instance=bookmark_e)
+
+        if form.is_valid():
+            # bookmark = form.save(commit=False)
+            # bookmark.added_by = request.user
+            # bookmark.category_id = id
+            form.save()
+
+            return redirect('bookmark-category-detail',id=cat_id)
+    else:
+        form = BookmarkForm(instance=bookmark_e)
+    context = {
+        'form':form,
+        'category':category,
+        'bookmark':bookmark_e,
+    }
+    return render(request,template_name,context)
+
+
+@login_required
+def bookmark_delete(request,cat_id,book_id):
+    bookmark = Bookmark.objects.filter(added_by=request.user).get(pk=book_id)
+    # categoriesView
+    bookmark.delete()
+    return redirect('bookmark-category-detail', id=cat_id)
 
 
 
