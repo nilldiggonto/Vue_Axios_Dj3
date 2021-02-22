@@ -12,9 +12,9 @@
             <div class="card">
                 <div class="card-header bg-primary text-light text-center">
                     <h5>LIST OF ALL MY TASK</h5>
-                   <form action="" class="form-inline d-flex justify-content-center">
-                       <input type="text" class="form-control mx-1" v-model="task">
-                       <button class="btn btn-success btn-sm">Add</button>
+                   <form action="" class="form-inline d-flex justify-content-center" @submit.prevent="createTask">
+                       <input  type="text" class="form-control mx-1" v-model="task">
+                       <button class="btn btn-success btn-sm" >Add</button>
                     
                    </form>
                 </div>
@@ -40,6 +40,22 @@
 {%block script %}
 
 <script>
+
+    function sendRequest(url,method,data){
+        var r = axios({
+            method:method,
+            url:url,
+            data:data,
+            xsrfCookieName: 'csrftoken',
+            xsrfHeaderName: 'X-CSRFToken',
+            headers:{
+                'X-Requested-With':'XMLHttpRequest'
+            }
+        })
+        return r
+    }
+
+
     var app = new Vue({
         el:'#app',
         data:{
@@ -48,6 +64,28 @@
                 {title:'one'},
                 {title:'two'},
             ]
+        },
+        created(){
+            var vm = this;
+            var r = sendRequest('','get')
+            
+            .then(function(response){
+                vm.tasks = response.data.tasks;
+            })
+        },
+        methods:{
+            createTask(){
+                var vm= this;
+                var formData = new FormData();
+                console.log(formData)
+                formData.append('title', this.task);
+
+                sendRequest('','post',formData)
+                .then(function(response){
+                    vm.tasks.push(response.data.tasks);
+                    vm.task = ''
+                })
+            }
         }
     })
 </script>
