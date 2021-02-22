@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 from .models import Category,Bookmark
 from .forms import CategoryForm,BookmarkForm
 
+from django.contrib import messages
+
 
 # Create your views here.
 def bookmarkView(request):
@@ -50,6 +52,7 @@ def categoryAddView(request):
             category.added_by = request.user
             category.save()
 
+            messages.success(request,'New Category Added')
             return redirect('bookmark-category')
     else:
         form = CategoryForm()
@@ -73,7 +76,7 @@ def categoryEditView(request,id):
             form.save()
             # category.added_by = request.user
             # category.save()
-
+            messages.success(request,'Category Updated')
             return redirect('bookmark-category')
     else:
         form = CategoryForm(instance=catForm)
@@ -113,6 +116,7 @@ def category_delete(request,id):
     category = Category.objects.filter(added_by=request.user).get(pk=id)
     # categoriesView
     category.delete()
+    messages.success(request,'Category Deleted')
     return redirect('bookmark-category')
 
 
@@ -138,7 +142,7 @@ def bookmarkAddView(request,id):
             bookmark.added_by = request.user
             bookmark.category_id = id
             bookmark.save()
-
+            messages.success(request,'New Link Added')
             return redirect('bookmark-category-detail',id=id)
     else:
         form = BookmarkForm()
@@ -165,7 +169,7 @@ def bookmarkEditView(request,cat_id,book_id):
             # bookmark.added_by = request.user
             # bookmark.category_id = id
             form.save()
-
+            messages.success(request,'Updated Link')
             return redirect('bookmark-category-detail',id=cat_id)
     else:
         form = BookmarkForm(instance=bookmark_e)
@@ -181,7 +185,9 @@ def bookmarkEditView(request,cat_id,book_id):
 def bookmark_delete(request,cat_id,book_id):
     bookmark = Bookmark.objects.filter(added_by=request.user).get(pk=book_id)
     # categoriesView
+
     bookmark.delete()
+    messages.success(request,'Link deleted')
     return redirect('bookmark-category-detail', id=cat_id)
 
 

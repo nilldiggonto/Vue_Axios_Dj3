@@ -1,0 +1,10 @@
+{% if messages %}
+    {%for message in messages %}
+    <div class="alert alert-dismissible alert-{{message.tags}}">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <span class="alert-heading">{{message.tags}}! {{message}}</span>
+        <!-- <p class="mb-0"></p> -->
+      </div>
+
+    {%endfor%}
+{%endif%}

@@ -11,6 +11,8 @@
     <li class="breadcrumb-item active">{{cat.title}}</li>
   </ol>
 
+  {%include 'alert.html' %}
+
 <div class="container mt-1">
     <a href="{%url 'bookmark-add' cat.id %}" class="btn btn-block btn-sm btn-success mb-2">Add New Bookmark</a>
     <div class="row ">
