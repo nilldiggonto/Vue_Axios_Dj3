@@ -2,6 +2,8 @@ from django.urls import path
 from .views import (bookmarkView,SignupView,categoriesView,categoryDetailView,categoryAddView,
                         bookmarkAddView,categoryEditView,category_delete,bookmarkEditView,bookmark_delete)
 from django.contrib.auth import views
+
+from .api import api_delete_category
 urlpatterns = [
     path('',bookmarkView,name='bookmark-page'),
     path('signup/',SignupView,name='bookmark-signup'),
@@ -21,5 +23,8 @@ urlpatterns = [
     path('category/bookmark/<int:id>/',bookmarkAddView,name='bookmark-add'),
     path('category/bookmark/<int:cat_id>/<int:book_id>/',bookmarkEditView,name='bookmark-edit'),
     path('category/bookmark/delete/<int:cat_id>/<int:book_id>/',bookmark_delete,name='bookmark-delete'),
+
+
+    path('api/delete_category/<int:cat_id>/',api_delete_category,name='api_delete_category'),
 
 ]

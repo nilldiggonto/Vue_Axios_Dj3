@@ -11,7 +11,8 @@
 
   {%include 'alert.html' %}
 
-<div class="container mt-1">
+<div class="container mt-1" id="delete-category">
+    [[message]]
     <a href="{%url 'bookmark-category-add' %}" class="btn btn-block btn-sm btn-info">Add New Category</a>
     <div class="row">
         {% if category %}
@@ -20,7 +21,7 @@
             <div class="card border border-secondary mb-2">
                 <div class="card-header bg-primary text-white">
                     <h4 class="d-inline">{{cat.title}}</h4>
-                    <span class="float-right"><a href="{% url 'bookmark-category-delete' cat.id %}" class="btn btn-sm btn-danger">Delete</a></span>
+                    <span class="float-right"><a @click="toggleDialog({{cat.id}})"  class="btn btn-sm btn-danger">Delete</a></span>
                 </div>
                 <div class="card-body">
                     <p>{{cat.description}}</p>
@@ -36,10 +37,66 @@
 
         <!--col-md-4-->
 
+        <div v-bind:class="{'d-none': showDialog }">
+            <h4>ok</h4>
+            <!-- <div class="bg-dark">
+                <p>Are you sure</p>
+                <button class="delete" @click="showDialog =!showDialog"></button>
+            </div> -->
+
+            <button @click="deleteCategory()">delete now</button>
+        
+            <div>
+                <button>Yes delete</button>
+                <button @click="showDialog = !showDialog"> no</button>
+            </div> 
+        </div>
+
 
 <!--col-md-4-->
     </div>
 </div>
 
 
+
+
+
+
 {% endblock %}
+
+
+
+{%block script %}
+
+<script>
+    new Vue({
+        el:'#delete-category',
+        delimiters: ['[[',']]'],
+        data(){
+            return{
+                message:'test message',
+                showDialog:true,
+                category_id:0
+            }
+        },
+        methods:{
+            toggleDialog(id){
+                this.category_id = id,
+                this.showDialog = false
+            },
+            deleteCategory(){
+                axios.post('/bookmark/api/delete_category/' + this.category_id + '/')
+                .then((response)=>{
+                    this.showDialog = false
+                    console.log(response)
+
+                    window.location.href = '/bookmark/category/'
+                })
+                .catch((function(error){
+                    console.log(error)
+                }))
+            }
+        }
+    })
+</script>
+{%endblock script%}
